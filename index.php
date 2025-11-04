@@ -5,6 +5,8 @@ session_start();
 // Fetch resume content
 $stmt = $pdo->query("SELECT * FROM resume_content LIMIT 1");
 $resume = $stmt->fetch(PDO::FETCH_ASSOC);
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -16,6 +18,14 @@ $resume = $stmt->fetch(PDO::FETCH_ASSOC);
     .resume-container { max-width: 900px; margin: 50px auto; background: white; padding: 40px; border-radius: 15px; box-shadow: 0 0 10px rgba(0,0,0,0.1);}
     .edit-btn { float: right; }
   </style>
+  <script>
+    function copyLink() {
+      const link = window.location.origin + '/public.php?id=1';
+      navigator.clipboard.writeText(link).then(() => {
+        alert('Public link copied to clipboard:\n' + link);
+      });
+    }
+  </script>
 </head>
 <body>
   <div class="resume-container">
@@ -33,6 +43,7 @@ $resume = $stmt->fetch(PDO::FETCH_ASSOC);
     <h5>Projects</h5>
     <p><?= nl2br($resume['projects']) ?></p>
     <a href="login.php" class="btn btn-primary edit-btn">Edit</a>
+    <button type="button" class="btn" onclick="copyLink()">Copy Public Link</button>
   </div>
 </body>
 </html>

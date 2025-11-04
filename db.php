@@ -17,7 +17,7 @@ try {
     }
 }
 
-//Connect to resume_db (main database)
+//Connect to main database
 try {
     $pdo = new PDO("pgsql:host=$host;port=$port;dbname=$dbname;", $db_user, $db_pass);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS resume_content (
 );
 ");
 
-//Insert initial data if table is empty
+//initial data
 $stmt = $pdo->query("SELECT COUNT(*) FROM resume_content");
 if ($stmt->fetchColumn() == 0) {
     $pdo->exec("
@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS users (
 );
 ");
 
-//Insert default admin if table is empty
+//default admin
 $stmt = $pdo->query("SELECT COUNT(*) FROM users");
 if ($stmt->fetchColumn() == 0) {
     $hashedPassword = password_hash('admin123', PASSWORD_BCRYPT);

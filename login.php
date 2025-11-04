@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if ($user && password_verify($password, $user['password'])) {
     $_SESSION['user'] = $user['username'];
     header("Location: edit.php");
-    exit();
+    exit(); 
   } else {
     $error = "Invalid username or password.";
   }
